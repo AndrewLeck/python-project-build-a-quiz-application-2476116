@@ -51,7 +51,7 @@ class QuizParser(xml.sax.ContentHandler):
         elif tagname == "Question":
             self._parse_state = QuizParserState.PARSE_QUESTION
             if (attrs["type"] == "multichoice"):
-                self._current_question = QuestioncMC()
+                self._current_question = QuestionMC()
             elif (attrs["type"] == "tf"):
                 self._current_question = QuestionTF()
             self._current_question.points = int(attrs["points"])
