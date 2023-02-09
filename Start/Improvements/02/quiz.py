@@ -13,6 +13,8 @@ class Quiz:
         self.correct_count = 0
         self.total_points = 0
         # TODO: define a completion time property
+        self.completion_time = 0
+
 
     def print_header(self):
         print("\n\n*******************************************")
@@ -27,6 +29,7 @@ class Quiz:
               file=thefile, flush=True)
         print(f"RESULTS for {quiztaker}", file=thefile, flush=True)
         print(f"Date: {datetime.datetime.today()}", file=thefile, flush=True)
+        print(f"ELAPSED TIME: {self.completion_time}", file=thefile, flush=True)
         print(
             f"QUESTIONS: {self.correct_count} out of {len(self.questions)} correct", file=thefile, flush=True)
         print(f"SCORE: {self.score} points of possible {self.total_points}",
@@ -39,7 +42,8 @@ class Quiz:
         self.score = 0
         self.correct_count = 0
         # TODO: reset the completion time
-
+        self.completion_time = 0
+        
         for q in self.questions:
             q.is_correct = False
 
@@ -50,6 +54,8 @@ class Quiz:
         random.shuffle(self.questions)
 
         # TODO: record the start time of the quiz
+       
+        starttime = datetime.datetime.now()
 
         # execute each question and record the result
         for q in self.questions:
@@ -60,6 +66,9 @@ class Quiz:
             print("------------------------------------------------\n")
 
         # TODO: record the end time of the quiz
+        endtime = datetime.datetime.now()
+        self.completion_time = endtime - starttime
+        self.completion_time = datetime.timedelta(seconds= round(self.completion_time.total_seconds()))
 
         # return the results
         return (self.score, self.correct_count, self.total_points)
